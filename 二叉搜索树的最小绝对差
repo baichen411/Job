@@ -1,0 +1,21 @@
+
+class TreeNode(object):
+    def __init__(self, x):
+         self.val = x
+         self.left = None
+         self.right = None
+ 
+class Solution(object):
+    def getMinimumDifference(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        l = list()
+        def in_order(root):   #中序遍历
+            if root:
+                in_order(root.left)
+                l.append(root.val)
+                in_order(root.right)
+        in_order(root)  #此时l中为已排序好的列表
+        return min([b - a for a, b in zip(l, l[1:])])  #元组
